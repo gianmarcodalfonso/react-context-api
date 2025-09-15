@@ -3,9 +3,15 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import { useBudget } from "../contexts/BudgetContext";
 
 const ProductsPage = () => {
 	const [products, setProducts] = useState([]);
+	const { budgetMode } = useBudget();
+
+	const filteredProducts = budgetMode
+		? products.filter((item) => item.price <= 30)
+		: products;
 
 	useEffect(() => {
 		axios.get("https://fakestoreapi.com/products").then((resp) => {
@@ -20,7 +26,7 @@ const ProductsPage = () => {
 					<div className="col-12">
 						<h1>Pagina prodotti</h1>
 					</div>
-					{products.map((product) => {
+					{filteredProducts.map((product) => {
 						return (
 							<div className="col-4 my-3" key={product.id}>
 								<div className="card h-100">
