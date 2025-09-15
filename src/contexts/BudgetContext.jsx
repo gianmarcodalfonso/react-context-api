@@ -12,9 +12,9 @@ const BudgetProvider = ({ children }) => {
 	const value = { budgetMode, setBudgetMode };
 
 	return (
-		<BudgetContext.provider value={{ budgetMode, setBudgetMode }}>
+		<BudgetContext.Provider value={{ budgetMode, toggleBudgetMode }}>
 			{children}
-		</BudgetContext.provider>
+		</BudgetContext.Provider>
 	);
 };
 
